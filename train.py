@@ -15,6 +15,8 @@ from importlib import import_module
 import sys, os
 import numpy as np
 from scipy.sparse import csr_matrix
+from keras.preprocessing.image import ImageDataGenerator
+from keras.utils.np_utils import to_categorical
 
 from network import hierarchy_network as h_net
 from network import network, hierarychy_classifier
