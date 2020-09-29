@@ -70,6 +70,10 @@ def load_data(data_type='toy', ndim=1, f_train='', f_test=''):
         train_images /= std[:, None, None]
         test_images /= std[:, None, None]
         return (train_images, train_labels), (test_images, test_labels), 100
+    elif data_type == 'ear'
+        train_images = train_data
+        test_images = test_data
+        return (train_images, train_labels), (test_images, test_labels), 164
     else:
         raise ValueError
 
