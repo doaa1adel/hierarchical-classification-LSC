@@ -294,7 +294,7 @@ def main():
         trainer.extend(extensions.LogReport(trigger=(1, 'epoch')))
         trainer.extend(extensions.PrintReport(
             ['epoch', 'iteration', 'main/loss', 'main/loss_cc',
-             'main/loss_mut_info', 'main/H_Y', 'main/H_YX', 'elapsed_time']))
+             'main/loss_mut_info', 'main/H_Y', 'main/H_YX', 'main/accuracy' 'elapsed_time']))
         trainer.extend(extensions.snapshot(), trigger=(5, 'epoch'))
 
         if args.resume:
