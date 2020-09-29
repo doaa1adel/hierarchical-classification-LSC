@@ -71,8 +71,42 @@ def load_data(data_type='toy', ndim=1, f_train='', f_test=''):
         test_images /= std[:, None, None]
         return (train_images, train_labels), (test_images, test_labels), 100
     elif data_type == 'ear'
-        train_images = train_data
-        test_images = test_data
+        random_seed = np.random.seed(1142)
+        train_datagen = ImageDataGenerator(
+        rescale=1. / 255,
+        featurewise_center=True,
+        featurewise_std_normalization=True,
+        validation_split= 0.25,
+        zoom_range=0.2,
+        shear_range=0.2)
+
+        train_generator = train_datagen.flow_from_directory(
+        train_dir,
+        target_size=(100,100),
+        batch_size=100,
+        seed = random_seed,
+        shuffle = False,
+        subset = 'training',
+        class_mode='categorical')
+
+        test_datagen = ImageDataGenerator(rescale=1. / 255)
+        test_generator = test_datagen.flow_from_directory(
+        test_dir,
+        target_size=(100,100),
+        batch_size=100,
+        seed = random_seed,
+        shuffle = False,
+        class_mode='categorical')
+
+        train_data = np.load('/content/gdrive/My Drive/Colab Notebooks/Data/extracted_features/bottleneck_features_train_ear_InceptionV4_concate.npy')
+        test_data = np.load('/content/gdrive/My Drive/Colab Notebooks/Data/extracted_features/bottleneck_features_test_ear_InceptionV4_concate.npy')
+
+        train_labels = train_generator.classes
+        train_labels = to_categorical(train_labels, num_classes=164)
+
+
+        test_labels = test_generator.classes
+        test_labels = to_categorical(test_labels, num_classes=164)
         return (train_images, train_labels), (test_images, test_labels), 164
     else:
         raise ValueError
