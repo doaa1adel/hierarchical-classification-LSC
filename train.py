@@ -48,7 +48,7 @@ def data_generate():
     return instance, labels
 
 
-def load_data(data_type='toy', ndim=1, f_train='', f_test=''):
+def load_data(data_type='toy', ndim=1, f_train='', f_test='', train_data, test_data, train_labels,test_labels):
     if data_type == 'toy':
         train_instances, train_labels = data_generate()
         test_instances, test_labels = data_generate()
@@ -73,7 +73,8 @@ def load_data(data_type='toy', ndim=1, f_train='', f_test=''):
         test_images /= std[:, None, None]
         return (train_images, train_labels), (test_images, test_labels), 100
     elif data_type == 'ear'
-        
+        train_images=train_data
+        test_images=test_data
         return (train_images, train_labels), (test_images, test_labels), 164
     else:
         raise ValueError
